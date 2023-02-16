@@ -116,11 +116,42 @@ router.delete("/OS/delete/:id", async function (req, res, next) {
 
 /* SEARCH for eligibility */
 
-router.get("/eligibility/:key/:value", async function (req, res, next) {
+router.get("/compatibility/:key/:value", async function (req, res, next) {
   try {
     res.json(await eligibility.search(req.params.key, req.params.value));
   } catch (err) {
     console.error(`Not compatible`, err.message);
+    next(err);
+  }
+});
+
+/* GET compatibilty */
+router.get("/compatibility/list", async function (req, res, next) {
+  try {
+    res.json(await opSys.getMultiple(req.query.page));
+  } catch (err) {
+    console.error(`Error while getting operating systems `, err.message);
+    next(err);
+  }
+});
+
+/* POST compatibilty*/
+router.post("/compatibility/new", async function (req, res, next) {
+  try {
+    res.json(await opSys.create(req.body));
+  } catch (err) {
+    console.error(`Error while creating operating system`, err.message);
+    next(err);
+  }
+});
+
+
+/* PUT compatibilty */
+router.put("/compatibility/edit/:id", async function (req, res, next) {
+  try {
+    res.json(await opSys.update(req.params.id, req.body));
+  } catch (err) {
+    console.error(`Error while updating system`, err.message);
     next(err);
   }
 });
