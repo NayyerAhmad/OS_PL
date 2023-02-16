@@ -2,8 +2,6 @@ const express = require("express");
 const router = express.Router();
 const programmingLanguages = require("../services/programmingLanguages");
 
-
-// programming languages routes
 /* GET programming languages. */
 router.get("/pl/list", async function (req, res, next) {
   try {
