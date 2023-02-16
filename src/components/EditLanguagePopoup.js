@@ -69,7 +69,7 @@ export default function CustomizedDialogs({children}) {
         open={open}
       >
         <BootstrapDialogTitle id="customized-dialog-title" onClose={handleClose}>
-          Edit Language
+          Edit the necessary fields
         </BootstrapDialogTitle>
         <DialogContent dividers>
             {children}      

@@ -18,7 +18,7 @@ const columns = [
   { field: 'edit', headerName: 'Edit', width: 150,
       renderCell: (params) => (
         <CustomizedDialogs>
-        <EditFormPL></EditFormPL>
+        <EditFormPL params={params}></EditFormPL>
       </CustomizedDialogs>
     )
   },

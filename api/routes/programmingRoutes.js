@@ -104,7 +104,7 @@ router.put("/OS/edit/:id", async function (req, res, next) {
 router.delete("/OS/delete/:id", async function (req, res, next) {
   try {
     //res.json(await programmingLanguages.remove(req.params.id)); and also change the "/:id" in the router.detlete()- use this if you dont want to use the UI of POSTMAN
-    res.json(await opSys.remove(req.query.id));
+    res.json(await opSys.remove(req.params.id));
 
   } catch (err) {
     console.error(`Error while deleting operating system`, err.message);

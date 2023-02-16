@@ -2,12 +2,13 @@ import React, { useState } from "react";
 import { TextField, Button, Grid } from "@material-ui/core";
 import "../components/styles/forms.css"
 
-function EditFormPL() {
-  const [name, setName] = useState("");
-  const [releasedYear, setReleasedYear] = useState("");
-  const [githubRank, setGithubRank] = useState("");
-  const [pyplRank, setPyplRank] = useState("");
-  const [tiobeRank, setTiobeRank] = useState("");
+function EditFormPL(params) {
+  const [dataId] = useState(params.params.row.id);
+  const [name, setName] = useState(params.params.row.name);
+  const [releasedYear, setReleasedYear] = useState(params.params.row.released_year);
+  const [githubRank, setGithubRank] = useState(params.params.row.githut_rank);
+  const [pyplRank, setPyplRank] = useState(params.params.row.pypl_rank);
+  const [tiobeRank, setTiobeRank] = useState(params.params.row.tiobe_rank);
 
   const handleAddLanguage = async (event) => {
     event.preventDefault();
@@ -21,7 +22,7 @@ function EditFormPL() {
     };
 
     try {
-      const response = await fetch("http://localhost:3001/pl/edit/", {
+      const response = await fetch("http://localhost:3001/pl/edit/" + dataId, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
