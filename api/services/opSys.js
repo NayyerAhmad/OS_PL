@@ -65,9 +65,9 @@ async function remove(id) {
 }
 
 
-async function search(opSys) {
+async function search(opSys, id) {
   const rows = await db.query(
-    `SELECT * FROM operating_system WHERE name LIKE "%${opSys}%" and %${id}%`
+    `SELECT * FROM operating_system WHERE name LIKE "%${opSys}%" and "%${id}"%`
   );
 
   const data = helper.emptyOrRows(rows);

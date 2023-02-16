@@ -17,7 +17,12 @@ const columns = [
     headerName: 'Edit', 
     width: 100, 
     renderCell: (params) => (
-      <IconButton>
+      <IconButton onClick={() => {
+        const name = params.row.name;
+        fetch(`http://localhost:3000/edit/${name}`)
+          .then(response => response.json())
+          .then(data => console.log(data))
+      }}>
         <EditIcon />
       </IconButton>
     )
@@ -27,7 +32,12 @@ const columns = [
     headerName: 'Delete', 
     width: 100, 
     renderCell: (params) => (
-      <IconButton>
+      <IconButton onClick={() => {
+        const name = params.row.name;
+        fetch(`http://localhost:3000/delete/${name}`, { method: 'DELETE' })
+          .then(response => response.json())
+          .then(data => console.log(data))
+      }}>
         <DeleteIcon />
       </IconButton>
     )

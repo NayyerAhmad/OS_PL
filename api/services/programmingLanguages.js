@@ -64,9 +64,9 @@ async function remove(id) {
 
   return { message };
 }
-async function search(Language) {
+async function search(Language, id) {
   const rows = await db.query(
-    `SELECT * FROM programming_languages WHERE name LIKE "%${Language}%" and %${id}%`
+    `SELECT * FROM programming_languages WHERE name LIKE "%${Language}%" and "%${id}%"`
   );
 
   const data = helper.emptyOrRows(rows);

@@ -1,43 +1,72 @@
-import React, { useState, useEffect } from 'react';
-import { DataGrid } from '@material-ui/data-grid';
-import FormCompatibility from './home';
+import React, { useState } from "react";
+import {
+  Button,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+} from "@material-ui/core";
+import { Computer, Code } from "@material-ui/icons";
 
-const columns = [
-  { field: 'id', headerName: 'ID' },
-  { field: 'name_os', headerName: 'Operating System', width: 200 },
-  { field: 'name_pl', headerName: 'Programming Language', width: 300 }
-];
+function App() {
+  const [os, setOs] = useState("");
+  const [language, setLanguage] = useState("");
 
-const Programming = () => {
-  const [tableData, setTableData] = useState([]);
-  const [deletedRows, setDeletedRows] = useState([]);
+  const handleOsChange = (event) => {
+    setOs(event.target.value);
+  };
 
-  useEffect(() => {
-    fetch('http://localhost:3001/OS/list')
-      .then((response) => response.json())
-      .then((data) => {
-        setTableData(data.data)});
-  }, []);
+  const handleLanguageChange = (event) => {
+    setLanguage(event.target.value);
+  };
 
-  const handleRowSelection = (selection) => {
-    const selectedRowIds = selection.map((selectedRow) => parseInt(selectedRow, 10));
-    const rowsToDelete = tableData.filter((row) => selectedRowIds.includes(row.id));
-    setDeletedRows(rowsToDelete);
-    console.log(deletedRows);
+  const handleCheckCompatibility = () => {
+    // do something to check compatibility based on selected OS and language
   };
 
   return (
-    <div style={{ height: 700, width: '100%' }}>
-      <FormCompatibility/>
-      <DataGrid
-        title="Operating Systems"
-        rows={tableData}
-        columns={columns}
-        pageSize={12}
-        onSelectionModelChange={(selection) => handleRowSelection(selection.selectionModel)}
-      />
+    <div>
+      <div style={{ display: "flex", alignItems: "center" }}>
+        <Computer />
+        <FormControl style={{ minWidth: 120, marginLeft: 8 }}>
+          <InputLabel id="os-label">Operating System</InputLabel>
+          <Select
+            labelId="os-label"
+            id="os-select"
+            value={os}
+            onChange={handleOsChange}
+          >
+            <MenuItem value="windows">Windows</MenuItem>
+            <MenuItem value="macos">macOS</MenuItem>
+            <MenuItem value="linux">Linux</MenuItem>
+          </Select>
+        </FormControl>
+      </div>
+
+      <div style={{ display: "flex", alignItems: "center", marginTop: 16 }}>
+        <Code />
+        <FormControl style={{ minWidth: 120, marginLeft: 8 }}>
+          <InputLabel id="language-label">Programming Language</InputLabel>
+          <Select
+            labelId="language-label"
+            id="language-select"
+            value={language}
+            onChange={handleLanguageChange}
+          >
+            <MenuItem value="javascript">JavaScript</MenuItem>
+            <MenuItem value="python">Python</MenuItem>
+            <MenuItem value="java">Java</MenuItem>
+          </Select>
+        </FormControl>
+      </div>
+
+      <div style={{ marginTop: 16 }}>
+        <Button variant="contained" color="primary" onClick={handleCheckCompatibility}>
+          Check Compatibility
+        </Button>
+      </div>
     </div>
   );
-};
+}
 
-export default Programming;
+export default App;

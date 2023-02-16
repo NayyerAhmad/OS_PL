@@ -36,7 +36,7 @@ router.get("/OS/list", async function (req, res, next) {
   });
   
   /* PUT operating systems */
-  router.put("/OS/:id", async function (req, res, next) {
+  router.put("/OS/edit/:id", async function (req, res, next) {
     try {
       res.json(await opSys.update(req.params.id, req.body));
     } catch (err) {
@@ -46,7 +46,7 @@ router.get("/OS/list", async function (req, res, next) {
   });
   
   /* DELETE operating systems */
-  router.delete("/OS/delete", async function (req, res, next) {
+  router.delete("/OS/delete/:id", async function (req, res, next) {
     try {
       //res.json(await programmingLanguages.remove(req.params.id)); and also change the "/:id" in the router.detlete()- use this if you dont want to use the UI of POSTMAN
       res.json(await opSys.remove(req.query.id));

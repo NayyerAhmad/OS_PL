@@ -1,8 +1,6 @@
 const express = require("express");
 const router = express.Router();
 const programmingLanguages = require("../services/programmingLanguages");
-const opSys = require("../services/opSys")
-const eligibility = require("../services/eligibility")
 
 
 // programming languages routes
@@ -38,7 +36,7 @@ router.get("/search/pl/:key", async function (req, res, next) {
 });
 
 /* UPDATE programming language */
-router.put("/pl/:id", async function (req, res, next) {
+router.put("/pl/edit/:id", async function (req, res, next) {
   try {
     res.json(await programmingLanguages.update(req.params.id, req.body));
   } catch (err) {
@@ -48,10 +46,10 @@ router.put("/pl/:id", async function (req, res, next) {
 });
 
 /* DELETE programming language */
-router.delete("/pl/delete", async function (req, res, next) {
+router.delete("/pl/delete/:id", async function (req, res, next) {
   try {
     //res.json(await programmingLanguages.remove(req.params.id)); and also change the "/:id" in the router.detlete()- use this if you dont want to use the UI of POSTMAN
-    res.json(await programmingLanguages.remove(req.query.id));
+    res.json(await programmingLanguages.remove(req.params.id));
 
   } catch (err) {
     console.error(`Error while deleting programming language`, err.message);
