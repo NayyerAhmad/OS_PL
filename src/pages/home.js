@@ -1,8 +1,67 @@
-import '../components/styles/home.css'
+import React, { useState, useEffect } from 'react';
+import { DataGrid } from '@material-ui/data-grid';
+import FormPL from '../components/FormPL';
+import DeleteIcon from '@material-ui/icons/Delete';
+import EditIcon from '@material-ui/icons/Edit';
+import IconButton from '@material-ui/core/IconButton';
 
-function About() {
-  return <p>A simple app made with React as front-end and Express as back-end.
-    The app shows the list of all the operating systems and the programming languages in the database. Additionally it allows you to check the compatibility depending on your operating system and the programming language
-  </p>;
-}
-export default About;
+const columns = [
+  { field: 'id', headerName: 'ID' },
+  { field: 'name', headerName: 'Name', width: 200 },
+  { field: 'released_year', headerName: 'Released Year', width: 200 },
+  { field: 'githut_rank', headerName: 'GitHut Rank', width: 300 },
+  { field: 'pypl_rank', headerName: 'PyPL Rank', width: 300 },
+  { field: 'tiobe_rank', headerName: 'TIOBE Rank', width: 300 },
+  { 
+    field: 'edit', 
+    headerName: 'Edit', 
+    width: 100, 
+    renderCell: (params) => (
+      <IconButton>
+        <EditIcon />
+      </IconButton>
+    )
+  },
+  {
+    field: 'delete', 
+    headerName: 'Delete', 
+    width: 100, 
+    renderCell: (params) => (
+      <IconButton>
+        <DeleteIcon />
+      </IconButton>
+    )
+  }
+];
+
+const Programming = () => {
+  const [tableData, setTableData] = useState([]);
+  const [deletedRows, setDeletedRows] = useState([]);
+
+  useEffect(() => {
+    fetch('http://localhost:3001/pl/list')
+      .then(response => response.json())
+      .then(data => setTableData(data.data));
+  }, []);
+
+  const handleRowSelection = (selection) => {
+    const selectedRowIds = selection.map(selectedRow => parseInt(selectedRow, 10));
+    const rowsToDelete = tableData.filter(row => selectedRowIds.includes(row.id));
+    setDeletedRows(rowsToDelete);
+  };
+
+  return (
+    <div style={{ height: 700, width: '100%' }}>
+      <FormPL />
+      <DataGrid
+        title="Programming Languages"
+        rows={tableData}
+        columns={columns}
+        pageSize={12}
+        onSelectionModelChange={selection => handleRowSelection(selection.selectionModel)}
+      />
+    </div>
+  );
+};
+
+export default Programming;

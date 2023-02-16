@@ -1,7 +1,11 @@
 const express = require("express");
 const app = express();
-const port = 3000;
-const programmingLanguagesRouter = require("./routes/programmingLanguages");
+var cors = require('cors');
+const port = 3001;
+const programmingLanguagesRouter = require("./routes/programmingRoutes");
+
+
+app.use(cors())
 
 app.use(express.json());
 app.use(

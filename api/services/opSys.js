@@ -6,7 +6,7 @@ async function getMultiple(page = 1) {
   const offset = helper.getOffset(page, config.listPerPage);
   const rows = await db.query(
     `SELECT id, name, released_year 
-    FROM operating_system LIMIT ${offset},${config.listPerPage}`
+    FROM operating_system`
   );
   const data = helper.emptyOrRows(rows);
   const meta = { page };
