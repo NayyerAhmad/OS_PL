@@ -9,17 +9,17 @@ const columns = [
   { field: 'id', headerName: 'ID' },
   { field: 'name', headerName: 'Name', width: 200 },
   { field: 'released_year', headerName: 'Released Year', width: 200 },
-  { field: 'githut_rank', headerName: 'GitHut Rank', width: 300 },
-  { field: 'pypl_rank', headerName: 'PyPL Rank', width: 300 },
-  { field: 'tiobe_rank', headerName: 'TIOBE Rank', width: 300 },
+  { field: 'githut_rank', headerName: 'GitHut Rank', width: 200 },
+  { field: 'pypl_rank', headerName: 'PyPL Rank', width: 200 },
+  { field: 'tiobe_rank', headerName: 'TIOBE Rank', width: 200 },
   { 
     field: 'edit', 
     headerName: 'Edit', 
-    width: 100, 
+    width: 150, 
     renderCell: (params) => (
       <IconButton onClick={() => {
         const name = params.row.name;
-        fetch(`http://localhost:3000/edit/${name}`)
+        fetch(`http://localhost:3001/pl/edit/${name}`)
           .then(response => response.json())
           .then(data => console.log(data))
       }}>
@@ -30,11 +30,11 @@ const columns = [
   {
     field: 'delete', 
     headerName: 'Delete', 
-    width: 100, 
+    width: 150, 
     renderCell: (params) => (
       <IconButton onClick={() => {
-        const name = params.row.name;
-        fetch(`http://localhost:3000/delete/${name}`, { method: 'DELETE' })
+        const id = params.row.id;
+        fetch(`http://localhost:3001/pl/delete/${id}`, {method:"DELETE"})
           .then(response => response.json())
           .then(data => console.log(data))
       }}>
