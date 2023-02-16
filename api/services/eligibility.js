@@ -6,7 +6,7 @@ const config = require("../config");
 async function search(name_os, name_pl) {
   const rows = await db.query(
     `SELECT * FROM eligibility
-    WHERE name_os="${name_os}" AND name_pl="${name_pl}";`
+    WHERE name_os="${name_os}" AND name_pl="${name_pl}"`
   );
 
   const data = helper.emptyOrRows(rows);
@@ -39,7 +39,7 @@ async function create(eligibility) {
     `INSERT INTO eligibility 
     (name_os, name_pl) 
     VALUES 
-    ("${eligibility.name_os}", ${eligibility.name_pl})`
+    ("${eligibility.name_os}", "${eligibility.name_pl}")`
   );
 
   let message = "Error in creating relationship";
@@ -54,7 +54,7 @@ async function create(eligibility) {
 async function update(id, eligibility) {
   const result = await db.query(
     `UPDATE eligibility 
-    SET name_os="${eligibility.name_os}", name_pl=${eligibility.name_pl}
+    SET name_os="${eligibility.name_os}", name_pl="${eligibility.name_pl}"
     WHERE id=${id}`
   );
 

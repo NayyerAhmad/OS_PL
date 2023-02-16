@@ -116,7 +116,7 @@ router.delete("/OS/delete/:id", async function (req, res, next) {
 
 /* SEARCH for eligibility */
 
-router.get("/compatibility/:key/:value", async function (req, res, next) {
+router.get("/eligibility/:key/:value", async function (req, res, next) {
   try {
     res.json(await eligibility.search(req.params.key, req.params.value));
   } catch (err) {
@@ -126,32 +126,44 @@ router.get("/compatibility/:key/:value", async function (req, res, next) {
 });
 
 /* GET compatibilty */
-router.get("/compatibility/list", async function (req, res, next) {
+router.get("/eligibility/list", async function (req, res, next) {
   try {
-    res.json(await opSys.getMultiple(req.query.page));
+    res.json(await eligibility.getMultiple(req.query.page));
   } catch (err) {
-    console.error(`Error while getting operating systems `, err.message);
+    console.error(`Error while getting relationship `, err.message);
     next(err);
   }
 });
 
 /* POST compatibilty*/
-router.post("/compatibility/new", async function (req, res, next) {
+router.post("/eligibility/new", async function (req, res, next) {
   try {
-    res.json(await opSys.create(req.body));
+    res.json(await eligibility.create(req.body));
   } catch (err) {
-    console.error(`Error while creating operating system`, err.message);
+    console.error(`Error while creating relationship`, err.message);
     next(err);
   }
 });
 
 
 /* PUT compatibilty */
-router.put("/compatibility/edit/:id", async function (req, res, next) {
+router.put("/eligibility/edit/:id", async function (req, res, next) {
   try {
-    res.json(await opSys.update(req.params.id, req.body));
+    res.json(await eligibility.update(req.params.id, req.body));
   } catch (err) {
-    console.error(`Error while updating system`, err.message);
+    console.error(`Error while updating relationship`, err.message);
+    next(err);
+  }
+});
+
+/* DELETE compatibility */
+router.delete("/eligibility/delete/:id", async function (req, res, next) {
+  try {
+    //res.json(await programmingLanguages.remove(req.params.id)); and also change the "/:id" in the router.detlete()- use this if you dont want to use the UI of POSTMAN
+    res.json(await eligibility.remove(req.params.id));
+
+  } catch (err) {
+    console.error(`Error while deleting relationship`, err.message);
     next(err);
   }
 });
