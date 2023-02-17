@@ -35,7 +35,7 @@ const columns = [
   }
 ];
 
-const Programming = () => {
+const OperaingSystem = () => {
   const [tableData, setTableData] = useState([]);
   const [deletedRows, setDeletedRows] = useState([]);
 
@@ -71,4 +71,4 @@ const Programming = () => {
   );
 };
 
-export default Programming;
+export default OperaingSystem;
