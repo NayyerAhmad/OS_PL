@@ -1,45 +1,66 @@
-import * as React from 'react';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
+import React, { useState } from "react";
+import { TextField, Button, Box } from "@material-ui/core";
+import { AddCircle } from "@material-ui/icons";
+import "../components/styles/forms.css"
 
-export default function SelectVariants() {
-  const [operatingSystem, setOperatingSystem] = React.useState('');
-  const [osNames, setOsNames] = React.useState([]);
+function FormCompatibility() {
+  const [nameOS, setNameOS] = useState("");
+  const [namePL, setNamePL] = useState("");
 
-  React.useEffect(() => {
-    fetch('http://localhost:3001/eligibility/list')
-      .then(response => response.json())
-      .then(data => setOsNames(data.data.map(item => item.name_os)))
-      .catch(error => console.log(error));
-  }, []);
+  const handleAddLanguage = async (event) => {
+    event.preventDefault();
 
-  const handleChange = (event) => {
-    setOperatingSystem(event.target.value);
+    const data = {
+      name_os: nameOS,
+      name_pl: namePL,
+    };
+
+    try {
+      const response = await fetch("http://localhost:3001/eligibility/new", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+      const responseData = await response.json();
+      console.log(responseData);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
-    <div>
-      <FormControl variant="standard" sx={{ m: 1, minWidth: 220 }}>
-        <InputLabel id="OS-label">Operating System</InputLabel>
-        <Select
-          labelId="OS"
-          id="os_name"
-          value={operatingSystem}
-          onChange={handleChange}
-          label="Operating System"
+    <form onSubmit={handleAddLanguage}>
+      <Box display="flex" flexDirection="column" alignItems="center">
+        <TextField
+          label="Name"
+          value={nameOS}
+          onChange={(e) => setNameOS(e.target.value)}
+          margin="normal"
+          variant="outlined"
+          size="small"
+        />
+        <TextField
+          label="Released Year"
+          type="number"
+          value={namePL}
+          onChange={(e) => setNamePL(e.target.value)}
+          margin="normal"
+          variant="outlined"
+          size="small"
+        />
+        <Button
+          variant="contained"
+          color="primary"
+          type="submit"
+          startIcon={<AddCircle />}
         >
-          <MenuItem value="">
-            <em>None</em>
-          </MenuItem>
-          {osNames.map(name => (
-            <MenuItem key={name} value={name}>
-              {name}
-            </MenuItem>
-          ))}
-        </Select>
-      </FormControl>
-    </div>
+          Add Relationship
+        </Button>
+      </Box>
+    </form>
   );
 }
+
+export default FormCompatibility;

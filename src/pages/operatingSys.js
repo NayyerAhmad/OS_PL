@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { DataGrid } from '@material-ui/data-grid';
 import FormOS from '../components/FormOS';
 import DeleteIcon from '@material-ui/icons/Delete';
-import EditIcon from '@material-ui/icons/Edit';
 import IconButton from '@material-ui/core/IconButton';
 import CustomizedDialogs from "../components/EditLanguagePopoup";
 import EditFormOS from '../components/EditFormOS';
@@ -54,12 +53,18 @@ const Programming = () => {
 
   return (
     <div style={{ height: 700, width: '100%' }}>
+      <h1>operating System Form</h1>
+      <p>Use the form below to add more operating systems into the data</p>
+      <br/>
       <FormOS />
+      <br/>
+      <h1>Programming Language Table</h1>
+      <br/>
       <DataGrid
         title="Programming Languages"
         rows={tableData}
         columns={columns}
-        pageSize={12}
+        pageSize={10}
         onSelectionModelChange={selection => handleRowSelection(selection.selectionModel)}
       />
     </div>

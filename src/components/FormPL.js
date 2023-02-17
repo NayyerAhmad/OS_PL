@@ -37,8 +37,8 @@ function FormPL() {
 
   return (
     <form onSubmit={handleAddLanguage}>
-      <Grid container spacing={2} alignItems="center">
-        <Grid item xs={12} md={6}>
+      <Grid container spacing={3} alignItems="center">
+        <Grid item xs={12} md={2}>
           <TextField
             label="Name"
             variant="outlined"
@@ -47,7 +47,7 @@ function FormPL() {
             onChange={(e) => setName(e.target.value)}
           />
         </Grid>
-        <Grid item xs={12} md={6}>
+        <Grid item xs={12} md={2}>
           <TextField
             label="Released Year"
             variant="outlined"
@@ -57,7 +57,7 @@ function FormPL() {
             onChange={(e) => setReleasedYear(e.target.value)}
           />
         </Grid>
-        <Grid item xs={12} md={6}>
+        <Grid item xs={12} md={2}>
           <TextField
             label="GitHub Rank"
             variant="outlined"
@@ -67,7 +67,7 @@ function FormPL() {
             onChange={(e) => setGithubRank(e.target.value)}
           />
         </Grid>
-        <Grid item xs={12} md={6}>
+        <Grid item xs={12} md={2}>
           <TextField
             label="PyPL Rank"
             variant="outlined"
@@ -77,7 +77,7 @@ function FormPL() {
             onChange={(e) => setPyplRank(e.target.value)}
           />
         </Grid>
-        <Grid item xs={12} md={6}>
+        <Grid item xs={12} md={2}>
           <TextField
             label="TIOBE Rank"
             variant="outlined"

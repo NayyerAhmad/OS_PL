@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { DataGrid } from '@material-ui/data-grid';
 import FormPL from '../components/FormPL';
 import DeleteIcon from '@material-ui/icons/Delete';
-import EditIcon from '@material-ui/icons/Edit';
 import IconButton from '@material-ui/core/IconButton';
 import CustomizedDialogs from "../components/EditLanguagePopoup";
 import EditFormPL from '../components/EditFormPL';
@@ -57,12 +56,18 @@ const Programming = () => {
 
   return (
     <div style={{ height: 700, width: '100%' }}>
+      <h1>Programming Language Form</h1>
+      <p>Use the form below to add more languages into the data</p>
+      <br/>
       <FormPL />
+      <br/>
+      <h1>Programming Language Table</h1>
+      <br/>
       <DataGrid
         title="Programming Languages"
         rows={tableData}
         columns={columns}
-        pageSize={12}
+        pageSize={10}
         onSelectionModelChange={selection => handleRowSelection(selection.selectionModel)}
       />
     </div>

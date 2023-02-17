@@ -24,4 +24,15 @@
     display: block;
     margin: 0 auto;
   }
+
+  .grid-container {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .grid-item {
+    display: flex;
+    justify-content: center;
+  }
+  
   

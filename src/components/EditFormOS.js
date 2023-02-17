@@ -54,7 +54,7 @@ function EditFormPL(params) {
         </Grid>
         <Grid item xs={12}>
           <Button variant="contained" color="primary" type="submit">
-            Edit Language
+            Edit Operating System
           </Button>
         </Grid>
       </Grid>
