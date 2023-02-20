@@ -6,7 +6,7 @@ import {
   Typography,
   makeStyles,
 } from "@material-ui/core";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   navlinks: {
@@ -27,10 +27,18 @@ const useStyles = makeStyles((theme) => ({
       borderBottom: "1px solid white",
     },
   },
+  activeLink: {
+    borderBottom: "1px solid white",
+  }
 }));
 
 function Navbar() {
   const classes = useStyles();
+  const location = useLocation();
+
+  const isActive = (pathname) => {
+    return location.pathname === pathname;
+  };
 
   return (
     <AppBar position="static">
@@ -40,16 +48,16 @@ function Navbar() {
           Compatibility Checker
         </Typography>
           <div className={classes.navlinks}>
-            <Link to="/" className={classes.link}>
+            <Link to="/" className={`${classes.link} ${isActive("/") && classes.activeLink}`}>
               Home
             </Link>
-            <Link to="/programming_languages" className={classes.link}>
+            <Link to="/programming_languages" className={`${classes.link} ${isActive("/programming_languages") && classes.activeLink}`}>
               Programming Languages
             </Link>
-            <Link to="/operating_systems" className={classes.link}>
+            <Link to="/operating_systems" className={`${classes.link} ${isActive("/operating_systems") && classes.activeLink}`}>
               Operating Systems
             </Link>
-            <Link to="/compatibility" className={classes.link}>
+            <Link to="/compatibility" className={`${classes.link} ${isActive("/compatibility") && classes.activeLink}`}>
               Compatibility Checker
             </Link>
           </div>

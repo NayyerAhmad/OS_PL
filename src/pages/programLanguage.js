@@ -3,7 +3,7 @@ import { DataGrid } from '@material-ui/data-grid';
 import FormPL from '../components/FormPL';
 import DeleteIcon from '@material-ui/icons/Delete';
 import IconButton from '@material-ui/core/IconButton';
-import CustomizedDialogs from "../components/EditLanguagePopoup";
+import CustomizedDialogs from "../components/EditPopoup";
 import EditFormPL from '../components/EditFormPL';
 
 

@@ -22,7 +22,7 @@ async function search(name_os, name_pl) {
 async function getMultiple(page = 1) {
   const offset = helper.getOffset(page, config.listPerPage);
   const rows = await db.query(
-    `SELECT id, name_os, name_pl 
+    `SELECT id_pl, name_os, name_pl 
     FROM eligibility`
   );
   const data = helper.emptyOrRows(rows);
@@ -37,9 +37,9 @@ async function getMultiple(page = 1) {
 async function create(eligibility) {
   const result = await db.query(
     `INSERT INTO eligibility 
-    (name_os, name_pl) 
+    (id_os, name_os, id_pl, name_pl) 
     VALUES 
-    ("${eligibility.name_os}", "${eligibility.name_pl}")`
+    (${eligibility.id_os}, "${eligibility.name_os}",${eligibility.id_pl}, "${eligibility.name_pl}")`
   );
 
   let message = "Error in creating relationship";

@@ -3,7 +3,7 @@ import { DataGrid } from '@material-ui/data-grid';
 import FormOS from '../components/FormOS';
 import DeleteIcon from '@material-ui/icons/Delete';
 import IconButton from '@material-ui/core/IconButton';
-import CustomizedDialogs from "../components/EditLanguagePopoup";
+import CustomizedDialogs from "../components/EditPopoup";
 import EditFormOS from '../components/EditFormOS';
 
 
@@ -35,7 +35,7 @@ const columns = [
   }
 ];
 
-const OperaingSystem = () => {
+const OperaingSys = () => {
   const [tableData, setTableData] = useState([]);
   const [deletedRows, setDeletedRows] = useState([]);
 
@@ -53,7 +53,7 @@ const OperaingSystem = () => {
 
   return (
     <div style={{ height: 700, width: '100%' }}>
-      <h1>operating System Form</h1>
+      <h1>Operating System Form</h1>
       <p>Use the form below to add more operating systems into the data</p>
       <br/>
       <FormOS />
@@ -71,4 +71,4 @@ const OperaingSystem = () => {
   );
 };
 
-export default OperaingSystem;
+export default OperaingSys;
