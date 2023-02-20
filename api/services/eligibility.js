@@ -3,10 +3,10 @@ const helper = require("../helper");
 const config = require("../config");
 
 // used for checking the compatibility
-async function search(name_os, name_pl) {
+async function search(id_os, id_pl) {
   const rows = await db.query(
     `SELECT * FROM eligibility
-    WHERE name_os="${name_os}" AND name_pl="${name_pl}"`
+    WHERE id_os=${id_os} AND id_pl=${id_pl}`
   );
 
   const data = helper.emptyOrRows(rows);
@@ -22,7 +22,7 @@ async function search(name_os, name_pl) {
 async function getMultiple(page = 1) {
   const offset = helper.getOffset(page, config.listPerPage);
   const rows = await db.query(
-    `SELECT id_pl, name_os, name_pl 
+    `SELECT id_os, name_os, id_pl, name_pl
     FROM eligibility`
   );
   const data = helper.emptyOrRows(rows);
