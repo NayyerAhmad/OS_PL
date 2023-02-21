@@ -28,8 +28,12 @@ Open a web browser and navigate to "http://localhost:3000/" to view the applicat
 
 During the development of this project, I learned and revised the following core concepts:
 
-React Hooks: We used React Hooks, specifically useState and useEffect, to manage component state and to trigger fetching of data from an API when the component mounts.
+React Hooks: I used React Hooks, specifically useState and useEffect, to manage component state and to trigger fetching of data from an API when the component mounts.
 
 Fetching data from an API: Used the fetch function to retrieve data from APIs.
 
 Custom components: Building custom components based on the project needs
+
+## Conclusion
+
+In summary, this project is a web application built using React, Express, and MySQL. I used React Hooks, the fetch function, Material-UI, custom components, and event handling to create a user-friendly interface for finding the compatibility of different operating systems and programming languages. By following the steps mentioned above, users can easily run the project on their local machines and explore the codebase.
