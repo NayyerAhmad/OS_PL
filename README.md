@@ -1,6 +1,6 @@
-# Getting Started with Create React App
+# Introduction
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project is a web application that helps users add programming languages and operating systems with the ultimate goal of finding out the compatibility of different operating systems and programming languages. It is built using React for the front-end, Express for the server-side, and MySQL for the database.
 
 ## Available Scripts
 

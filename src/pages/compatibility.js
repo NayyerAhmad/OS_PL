@@ -16,7 +16,8 @@ export default function Compatibility() {
       const response = await fetch('http://localhost:3001/OS/list');
       const data = await response.json();
       const uniqueOsNames = Array.from(new Set(data.data.map(item => item.name)));
-      setOsOptions(uniqueOsNames);
+      const uniqueOsID = Array.from(new Set(data.data.map(item => item.id)));
+      setOsOptions(uniqueOsNames,uniqueOsID);
     } catch (error) {
       console.log(error);
     }
@@ -27,7 +28,8 @@ export default function Compatibility() {
       const response = await fetch('http://localhost:3001/pl/list');
       const data = await response.json();
       const uniquePlNames = Array.from(new Set(data.data.map(item => item.name)));
-      setPlOptions(uniquePlNames);
+      const uniquePlID = Array.from(new Set(data.data.map(item => item.id)));
+      setPlOptions(uniquePlNames,uniquePlID);
     } catch (error) {
       console.log(error);
     }
@@ -48,11 +50,11 @@ export default function Compatibility() {
 
   const handleAddRelationshipClick = async () => {
     try {
-      const osResponse = await fetch(`http://localhost:3001/OS/list?name=${operatingSystem}`);
+      const osResponse = await fetch(`http://localhost:3001/OS/list?id=${operatingSystem}`);
       const osData = await osResponse.json();
       const os = osData.data[0];
 
-      const plResponse = await fetch(`http://localhost:3001/pl/list?name=${programmingLanguage}`);
+      const plResponse = await fetch(`http://localhost:3001/pl/list?id=${programmingLanguage}`);
       const plData = await plResponse.json();
       const pl = plData.data[0];
 
@@ -62,10 +64,10 @@ export default function Compatibility() {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          id_os: os.id,
+          code_os: os.id,
           name_os: os.name,
           name_pl: pl.name,
-          id_pl: pl.id
+          code_pl: pl.id
         })
       });
 
