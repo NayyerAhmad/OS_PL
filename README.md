@@ -36,7 +36,7 @@ During the development of this project, I learned and revised the following core
 
 1. Writing API from sratch and confirming its functionality via Postman
 
-2. React Hooks: I used React Hooks, specifically useState and useEffect, to manage component state and to trigger fetching of data from an API when the component mounts.
+2. React Hooks: using React Hooks, specifically useState and useEffect, to manage component state and to trigger fetching of data from an API when the component mounts.
 
 3. Fetching data from an API: Used the fetch function to retrieve data from APIs.
 
