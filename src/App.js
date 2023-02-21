@@ -1,5 +1,4 @@
 import React from "react";
-import useDocumentTitle from "./components/useDocumentTitle";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Home from "./pages/home";
