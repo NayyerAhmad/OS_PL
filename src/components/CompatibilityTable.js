@@ -41,7 +41,7 @@ const CompatibilityTable = () => {
   const [deletedRows, setDeletedRows] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:3001/eligibility/list')
+    fetch('http://localhost:3001//list')
       .then(response => response.json())
       .then(data => setTableData(data.data));
   }, []);
