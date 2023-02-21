@@ -4,37 +4,43 @@ This project is a web application that helps users add programming languages and
 
 ## Tech Stack
 
-React\
-Express\
-MySQL\
-Material-UI
+- React\
+- Express\
+- MySQL\
+- Material-UI
+
+## Prerequisites
+
+- Node.js and npm installed on your system\
+
+- Visual Studio Code
 
 
 ## How to run the project
 
-Clone the repository from Github.\
+1. Clone the repository from Github.\
 \
-Open the terminal and navigate to the main directory of the project.\
+2. Open the terminal and navigate to the main directory of the project.\
 \
-Run the command "npm install" to install the necessary dependencies.\
+3. Run the command "npm install" to install the necessary dependencies.\
 \
-Navigate to the "api" directory and run the command "node index.js". This should start the server on port 3001.\
+4. Navigate to the "api" directory and run the command "node index.js". This should start the server on port 3001.\
 \
-Go back to the main directory and run the command "npm start". This should start the front-end on port 3000.\
+5. Go back to the main directory and run the command "npm start". This should start the front-end on port 3000.\
 \
-Open a web browser and navigate to "http://localhost:3000/" to view the application.
+6. Open a web browser and navigate to "http://localhost:3000/" to view the application.
 
 ## Learning Outcomes
 
 During the development of this project, I learned and revised the following core concepts:
 
-Writing API from sratch and confirming its functionality via Postman
+1. Writing API from sratch and confirming its functionality via Postman
 
-React Hooks: I used React Hooks, specifically useState and useEffect, to manage component state and to trigger fetching of data from an API when the component mounts.
+2. React Hooks: I used React Hooks, specifically useState and useEffect, to manage component state and to trigger fetching of data from an API when the component mounts.
 
-Fetching data from an API: Used the fetch function to retrieve data from APIs.
+3. Fetching data from an API: Used the fetch function to retrieve data from APIs.
 
-Custom components: Building custom components based on the project needs
+4. Custom components: Building custom components based on the project needs
 
 ## Conclusion
 
