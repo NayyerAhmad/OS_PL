@@ -5,6 +5,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import IconButton from '@material-ui/core/IconButton';
 import CustomizedDialogs from "../components/EditPopoup";
 import EditFormOS from '../components/EditFormOS';
+import EditFormEligibility from './EditFormEligibility';
 
 
 const columns = [
@@ -14,28 +15,28 @@ const columns = [
   { field: 'edit', headerName: 'Edit', width: 150,
       renderCell: (params) => (
         <CustomizedDialogs>
-        <EditFormOS params={params}></EditFormOS>
+        <EditFormEligibility params={params}></EditFormEligibility>
       </CustomizedDialogs>
     )
   },
-  // {
-  //   field: 'delete', 
-  //   headerName: 'Delete', 
-  //   width: 150, 
-  //   renderCell: (params) => (
-  //     <IconButton onClick={() => {
-  //       const id = params.row.id;
-  //       fetch(`http://localhost:3001/OS/delete/${id}`, {method:"DELETE"})
-  //         .then(response => response.json())
-  //         .then(data => console.log(data))
-  //     }}>
-  //       <DeleteIcon />
-  //     </IconButton>
-  //   )
-  // }
+  {
+    field: 'delete', 
+    headerName: 'Delete', 
+    width: 150, 
+    renderCell: (params) => (
+      <IconButton onClick={() => {
+        const id = params.row.id;
+        fetch(`http://localhost:3001/eligibility/delete/${id}`, {method:"DELETE"})
+          .then(response => response.json())
+          .then(data => console.log(data))
+      }}>
+        <DeleteIcon />
+      </IconButton>
+    )
+  }
 ];
 
-const OperaingSys = () => {
+const CompatibilityTable = () => {
   const [tableData, setTableData] = useState([]);
   const [deletedRows, setDeletedRows] = useState([]);
 
@@ -64,4 +65,4 @@ const OperaingSys = () => {
   );
 };
 
-export default OperaingSys;
+export default CompatibilityTable;
