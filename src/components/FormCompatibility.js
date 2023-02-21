@@ -1,63 +1,51 @@
-import React, { useState } from "react";
-import { TextField, Button, Grid } from "@material-ui/core";
-import "../components/styles/forms.css"
+import React, { useState, useEffect } from 'react';
+import { DataGrid } from '@material-ui/data-grid';
+import DeleteIcon from '@material-ui/icons/Delete';
+import IconButton from '@material-ui/core/IconButton';
+import CustomizedDialogs from '../components/EditPopoup';
+import EditFormOS from '../components/EditFormOS';
 
-function FormCompatibility() {
-  const [nameOS, setNameOS] = useState("");
-  const [namePL, setNamePL] = useState("");
+const columns = [
+  { field: 'id', headerName: 'ID' },
+  { field: 'code_os', headerName: 'Operating System', width: 200 },
+  { field: 'code_pl', headerName: 'Programming Language', width: 200 },
+  {
+    field: 'edit',
+    headerName: 'Edit',
+    width: 150,
+    renderCell: (params) => (
+      <CustomizedDialogs>
+        <EditFormOS params={params}></EditFormOS>
+      </CustomizedDialogs>
+    )
+  }
+];
 
-  const handleAddLanguage = async (event) => {
-    event.preventDefault();
+const CompatibilityTable = () => {
+  const [tableData, setTableData] = useState([]);
 
-    const data = {
-      name_os: nameOS,
-      name_pl: namePL,
-    };
+  useEffect(() => {
+    fetch('http://localhost:3001/eligibility/list')
+      .then(response => response.json())
+      .then(data => setTableData(data.data));
+  }, []);
 
-    try {
-      const response = await fetch("http://localhost:3001/eligibility/new", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      });
-      const responseData = await response.json();
-      console.log(responseData);
-    } catch (error) {
-      console.log(error);
-    }
+  const handleRowSelection = (selection) => {
+    const selectedRowIds = selection.map(selectedRow => parseInt(selectedRow, 10));
+    const rowsToDelete = tableData.filter(row => selectedRowIds.includes(row.id));
   };
 
   return (
-    <form onSubmit={handleAddLanguage}>
-      <Grid container spacing={3} alignItems="center">
-        <Grid item xs={12} md={2}>
-          <TextField
-            label="Operating System"
-            variant="outlined"
-            fullWidth
-            value={nameOS}
-            onChange={(e) => setNameOS(e.target.value)}
-          />
-        </Grid>
-        <Grid item xs={12} md={2}>
-          <TextField
-            label="Programming Language"
-            variant="outlined"
-            fullWidth
-            value={namePL}
-            onChange={(e) => setNamePL(e.target.value)}
-          />
-        </Grid>
-        <Grid item xs={12}>
-          <Button variant="contained" color="primary" type="submit">
-            Add Compatibility
-          </Button>
-        </Grid>
-      </Grid>
-    </form>
+    <div style={{ height: 700, width: '100%' }}>
+      <DataGrid
+        title="Programming Languages"
+        rows={tableData}
+        columns={columns}
+        pageSize={10}
+        onSelectionModelChange={selection => handleRowSelection(selection.selectionModel)}
+      />
+    </div>
   );
-}
+};
 
-export default FormCompatibility;
+export default CompatibilityTable;
