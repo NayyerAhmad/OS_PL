@@ -4,9 +4,9 @@ This project is a web application that helps users add programming languages and
 
 ## Tech Stack
 
-- React\
-- Express\
-- MySQL\
+- React
+- Express
+- MySQL
 - Material-UI
 
 ## Prerequisites
@@ -19,15 +19,15 @@ This project is a web application that helps users add programming languages and
 ## How to run the project
 
 1. Clone the repository from Github.\
-\
+
 2. Open the terminal and navigate to the main directory of the project.\
-\
+
 3. Run the command "npm install" to install the necessary dependencies.\
-\
+
 4. Navigate to the "api" directory and run the command "node index.js". This should start the server on port 3001.\
-\
+
 5. Go back to the main directory and run the command "npm start". This should start the front-end on port 3000.\
-\
+
 6. Open a web browser and navigate to "http://localhost:3000/" to view the application.
 
 ## Learning Outcomes
