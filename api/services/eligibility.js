@@ -10,8 +10,9 @@ async function search(code_os, code_pl) {
   );
 
   const data = helper.emptyOrRows(rows);
+  console.log(data)
 
-  if (data) {
+  if (data.length>0) {
     return { message: "eligible" };
     } else {
     return { message: "not eligible" };

@@ -71,7 +71,7 @@ export default function Compatibility() {
   };
   const handleCheckCompatibilityClick = async () => {
     try {
-      const response = await fetch(`http://localhost:3001/eligibility/${operatingSystem.value}/${programmingLanguage.children}`, {
+      const response = await fetch(`http://localhost:3001/eligibility/${operatingSystem.value}/${programmingLanguage.value}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json'

@@ -40,7 +40,7 @@ During the development of this project, I learned and revised the following core
 
 4. Custom components: Building custom components based on the project needs
 
-5. database
+5. 
 
 ## Upcoming features
 
