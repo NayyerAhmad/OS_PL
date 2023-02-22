@@ -4,15 +4,16 @@ import "../components/styles/forms.css"
 
 function EditFormEligibility(params) {
   const [dataId] = useState(params.params.row.id);
-  const [name, setName] = useState(params.params.row.name);
-  const [releasedYear, setReleasedYear] = useState(params.params.row.released_year);
+  const [nameOS, setNameOS] = useState(params.params.row.nameOS);
+  const [namePL, setNamePL] = useState(params.params.row.namePL);
 
   const handleAddLanguage = async (event) => {
     event.preventDefault();
 
     const data = {
-      name: name,
-      released_year: releasedYear,
+
+      name_os: nameOS,
+      name_pl: namePL,
     };
 
     try {
@@ -35,21 +36,20 @@ function EditFormEligibility(params) {
       <Grid container spacing={2} alignItems="center">
         <Grid item xs={12} md={6}>
           <TextField
-            label="Name"
+            label="Name OS"
             variant="outlined"
             fullWidth
-            value={name}
-            onChange={(e) => setName(e.target.value)}
+            value={nameOS}
+            onChange={(e) => setNameOS(e.target.value)}
           />
         </Grid>
         <Grid item xs={12} md={6}>
           <TextField
-            label="Released Year"
+            label="Name PL"
             variant="outlined"
             fullWidth
-            type="number"
-            value={releasedYear}
-            onChange={(e) => setReleasedYear(e.target.value)}
+            value={namePL}
+            onChange={(e) => setNamePL(e.target.value)}
           />
         </Grid>
         <Grid item xs={12}>

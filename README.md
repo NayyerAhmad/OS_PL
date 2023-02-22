@@ -11,9 +11,7 @@ This project is a web application that helps users add programming languages and
 
 ## Prerequisites
 
-- Node.js and npm installed on your system\
-
-- Visual Studio Code
+- Node.js and npm installed on your system
 
 
 ## How to run the project
@@ -41,6 +39,12 @@ During the development of this project, I learned and revised the following core
 3. Fetching data from an API: Used the fetch function to retrieve data from APIs.
 
 4. Custom components: Building custom components based on the project needs
+
+5. database
+
+## Upcoming features
+
+what neeeds to be learned and what updates will be pushed
 
 ## Conclusion
 

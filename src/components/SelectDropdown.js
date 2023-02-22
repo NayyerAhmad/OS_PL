@@ -9,18 +9,16 @@ export default function SelectDropdown({ options, value, onChange, label }) {
     <FormControl variant="standard" sx={{ m: 1, minWidth: 220 }}>
       <InputLabel id={`${label}-label`}>{label}</InputLabel>
       <Select
-        labelId={label}
+        labelId={`${label}-label`}
         id={label.toLowerCase()}
-        value={value}
+        value={value || ''}
         onChange={onChange}
         label={label}
       >
-        <MenuItem value="">
-          <em>None</em>
-        </MenuItem>
+        <MenuItem value=""></MenuItem>
         {options.map((option) => (
-          <MenuItem key={option} value={option}>
-            {option}
+          <MenuItem key={option.id} value={option.id}>
+            {option.name}
           </MenuItem>
         ))}
       </Select>

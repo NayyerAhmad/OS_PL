@@ -15,9 +15,7 @@ export default function Compatibility() {
     try {
       const response = await fetch('http://localhost:3001/OS/list');
       const data = await response.json();
-      const uniqueOsNames = Array.from(new Set(data.data.map(item => item.name)));
-      const uniqueOsID = Array.from(new Set(data.data.map(item => item.id)));
-      setOsOptions(uniqueOsNames,uniqueOsID);
+      setOsOptions(data.data);
     } catch (error) {
       console.log(error);
     }
@@ -27,9 +25,7 @@ export default function Compatibility() {
     try {
       const response = await fetch('http://localhost:3001/pl/list');
       const data = await response.json();
-      const uniquePlNames = Array.from(new Set(data.data.map(item => item.name)));
-      const uniquePlID = Array.from(new Set(data.data.map(item => item.id)));
-      setPlOptions(uniquePlNames,uniquePlID);
+      setPlOptions(data.data);
     } catch (error) {
       console.log(error);
     }
@@ -40,34 +36,27 @@ export default function Compatibility() {
     fetchPlOptions();
   }, []);
 
-  const handleOperatingSystemChange = (event) => {
-    setOperatingSystem(event.target.value);
+  const handleOperatingSystemChange = (event, object) => {
+    setOperatingSystem(object.props);
   };
 
-  const handleProgrammingLanguageChange = (event) => {
-    setProgrammingLanguage(event.target.value);
+  const handleProgrammingLanguageChange = (event, object) => {
+    setProgrammingLanguage(object.props);
+    console.log(object.props)
   };
 
   const handleAddRelationshipClick = async () => {
     try {
-      const osResponse = await fetch(`http://localhost:3001/OS/list?id=${operatingSystem}`);
-      const osData = await osResponse.json();
-      const os = osData.data[0];
-
-      const plResponse = await fetch(`http://localhost:3001/pl/list?id=${programmingLanguage}`);
-      const plData = await plResponse.json();
-      const pl = plData.data[0];
-
       const response = await fetch('http://localhost:3001/eligibility/new', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          code_os: os.id,
-          name_os: os.name,
-          name_pl: pl.name,
-          code_pl: pl.id
+          code_os: operatingSystem.value,
+          name_os: operatingSystem.children,
+          code_pl: programmingLanguage.value,
+          name_pl: programmingLanguage.children
         })
       });
 
@@ -80,23 +69,38 @@ export default function Compatibility() {
       console.log(error);
     }
   };
-
-  const handleCheckCompatibilityClick = () => {
-    // need to update this to handle the button functionality
+  const handleCheckCompatibilityClick = async () => {
+    try {
+      const response = await fetch(`http://localhost:3001/eligibility/${operatingSystem.value}/${programmingLanguage.children}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+  
+      if (response.ok) {
+        console.log('Compatible');
+      } else {
+        console.log('Not compatible');
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
+  
 
   return (
     <div>
       <p>Choose the Operating System and the Programming language to check their compatibility</p>
       <SelectDropdown
         options={osOptions}
-        value={operatingSystem}
+        value={operatingSystem.children}
         onChange={handleOperatingSystemChange}
         label="Operating System"
       />
       <SelectDropdown
         options={plOptions}
-        value={programmingLanguage}
+        value={programmingLanguage.children}
         onChange={handleProgrammingLanguageChange}
         label="Programming Language"
       />
@@ -107,7 +111,7 @@ export default function Compatibility() {
       <br/>
       <br/>
       <h1> table</h1>
-      {/* <CompatibilityTable/> */}
+      <CompatibilityTable/>
     </div>
   );
 }

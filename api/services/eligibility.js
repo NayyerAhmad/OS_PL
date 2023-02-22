@@ -22,7 +22,7 @@ async function search(code_os, code_pl) {
 async function getMultiple(page = 1) {
   const offset = helper.getOffset(page, config.listPerPage);
   const rows = await db.query(
-    `SELECT code_os, name_os, code_pl, name_pl
+    `SELECT id, code_os, name_os, code_pl, name_pl
     FROM eligibility`
   );
   const data = helper.emptyOrRows(rows);

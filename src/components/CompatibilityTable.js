@@ -1,24 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import { DataGrid } from '@material-ui/data-grid';
-import FormOS from '../components/FormOS';
 import DeleteIcon from '@material-ui/icons/Delete';
 import IconButton from '@material-ui/core/IconButton';
-import CustomizedDialogs from "../components/EditPopoup";
-import EditFormOS from '../components/EditFormOS';
-import EditFormEligibility from './EditFormEligibility';
+// import CustomizedDialogs from "../components/EditPopoup";
+// import EditFormEligibility from './EditFormEligibility';
 
 
 const columns = [
   { field: 'id', headerName: 'ID' },
   { field: 'name_os', headerName: 'Operating System', width: 200 },
   { field: 'name_pl', headerName: 'Programming Language', width: 200 },
-  { field: 'edit', headerName: 'Edit', width: 150,
-      renderCell: (params) => (
-        <CustomizedDialogs>
-        <EditFormEligibility params={params}></EditFormEligibility>
-      </CustomizedDialogs>
-    )
-  },
+  // { field: 'edit', headerName: 'Edit', width: 150,
+  //     renderCell: (params) => (
+  //       <CustomizedDialogs>
+  //       <EditFormEligibility params={params}></EditFormEligibility>
+  //     </CustomizedDialogs>
+  //   )
+  // },
   {
     field: 'delete', 
     headerName: 'Delete', 
@@ -41,7 +39,7 @@ const CompatibilityTable = () => {
   const [deletedRows, setDeletedRows] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:3001//list')
+    fetch('http://localhost:3001/eligibility/list')
       .then(response => response.json())
       .then(data => setTableData(data.data));
   }, []);
