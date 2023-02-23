@@ -5,6 +5,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import IconButton from '@material-ui/core/IconButton';
 import CustomizedDialogs from "../components/EditPopoup";
 import EditFormPL from '../components/EditFormPL';
+import { Dialog, DialogTitle, DialogContent, DialogActions, Button } from '@material-ui/core';
 
 
 const columns = [
@@ -26,17 +27,47 @@ const columns = [
     headerName: 'Delete', 
     width: 150, 
     renderCell: (params) => (
-      <IconButton onClick={() => {
-        const id = params.row.id;
-        fetch(`http://localhost:3001/pl/delete/${id}`, {method:"DELETE"})
-          .then(response => response.json())
-          .then(data => console.log(data))
-      }}>
-        <DeleteIcon />
-      </IconButton>
+      <DeleteButton params={params} />
     )
   }
 ];
+
+const DeleteButton = ({params}) => {
+  const [open, setOpen] = useState(false);
+  const handleClickOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+  
+  const handleDelete = () => {
+    const id = params.row.id;
+    fetch(`http://localhost:3001/pl/delete/${id}`, {method:"DELETE"})
+      .then(response => response.json())
+      .then(data => console.log(data))
+      .catch(error => console.log(error));
+    setOpen(false);
+  };
+
+  return (
+    <>
+      <IconButton onClick={handleClickOpen}>
+        <DeleteIcon />
+      </IconButton>
+      <Dialog open={open} onClose={handleClose}>
+        <DialogTitle>Confirm Delete</DialogTitle>
+        <DialogContent>
+          Are you sure you want to delete this item?
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose} color="primary">
+            No
+          </Button>
+          <Button onClick={handleDelete} color="primary" autoFocus>
+            Yes
+          </Button>
+        </DialogActions>
+      </Dialog>
+    </>
+  );
+}
 
 const Programming = () => {
   const [tableData, setTableData] = useState([]);
