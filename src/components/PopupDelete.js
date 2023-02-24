@@ -3,13 +3,17 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import IconButton from '@material-ui/core/IconButton';
 import { Dialog, DialogTitle, DialogContent, DialogActions, Button } from '@material-ui/core';
 
-const PopupDelete = ({ params, onDelete }) => {
+const DeleteButton = ({ params, apiUrl }) => {
   const [open, setOpen] = useState(false);
   const handleClickOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
   const handleDelete = () => {
-    onDelete(params.row.id);
+    const id = params.row.id;
+    fetch(apiUrl + id, { method: "DELETE" })
+      .then(response => response.json())
+      .then(data => console.log(data))
+      .catch(error => console.log(error));
     setOpen(false);
   };
 
@@ -36,4 +40,4 @@ const PopupDelete = ({ params, onDelete }) => {
   );
 };
 
-export default PopupDelete;
+export default DeleteButton;

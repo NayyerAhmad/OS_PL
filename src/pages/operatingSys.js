@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { DataGrid } from '@material-ui/data-grid';
 import FormOS from '../components/FormOS';
-import DeleteIcon from '@material-ui/icons/Delete';
-import IconButton from '@material-ui/core/IconButton';
 import CustomizedDialogs from "../components/EditPopoup";
 import EditFormOS from '../components/EditFormOS';
-import { Dialog, DialogTitle, DialogContent, DialogActions, Button } from '@material-ui/core';
+import DeleteButton from '../components/PopupDelete';
 
 const columns = [
   { field: 'id', headerName: 'ID' },
@@ -18,54 +16,17 @@ const columns = [
       </CustomizedDialogs>
     )
   },
-  {
-    field: 'delete', 
-    headerName: 'Delete', 
-    width: 150, 
-    renderCell: (params) => (
-      <DeleteButton params={params} />
-    )
-  }
-];
+    {
+      field: 'delete', 
+      headerName: 'Delete', 
+      width: 150, 
+      renderCell: (params) => (
+        <DeleteButton params={params} apiEndpoint="http://localhost:3001/OS/delete" />
+      )
+    }
+  ];
 
-const DeleteButton = ({params}) => {
-  const [open, setOpen] = useState(false);
-  const handleClickOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
-  
-  const handleDelete = () => {
-    const id = params.row.id;
-    fetch(`http://localhost:3001/OS/delete/${id}`, {method:"DELETE"})
-      .then(response => response.json())
-      .then(data => console.log(data))
-      .catch(error => console.log(error));
-    setOpen(false);
-  };
-
-  return (
-    <>
-      <IconButton onClick={handleClickOpen}>
-        <DeleteIcon />
-      </IconButton>
-      <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>Confirm Delete</DialogTitle>
-        <DialogContent>
-          Are you sure you want to delete this item?
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose} color="primary">
-            No
-          </Button>
-          <Button onClick={handleDelete} color="primary" autoFocus>
-            Yes
-          </Button>
-        </DialogActions>
-      </Dialog>
-    </>
-  );
-}
-
-const OperaingSys = () => {
+const OperatingSys = () => {
   const [tableData, setTableData] = useState([]);
   const [deletedRows, setDeletedRows] = useState([]);
 
@@ -101,4 +62,4 @@ const OperaingSys = () => {
   );
 };
 
-export default OperaingSys;
+export default OperatingSys;

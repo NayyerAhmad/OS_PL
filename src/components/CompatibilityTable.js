@@ -4,66 +4,35 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import IconButton from '@material-ui/core/IconButton';
 import CustomizedDialogs from "../components/EditPopoup";
 import EditFormEligibility from './EditFormEligibility';
-import { Dialog, DialogTitle, DialogContent, DialogActions, Button } from '@material-ui/core';
 
 
 const columns = [
   { field: 'id', headerName: 'ID' },
   { field: 'name_os', headerName: 'Operating System', width: 200 },
   { field: 'name_pl', headerName: 'Programming Language', width: 200 },
-  { field: 'edit', headerName: 'Edit', width: 150,
-      renderCell: (params) => (
-        <CustomizedDialogs>
-        <EditFormEligibility params={params}></EditFormEligibility>
-      </CustomizedDialogs>
-    )
-  },
+  // { field: 'edit', headerName: 'Edit', width: 150,
+  //     renderCell: (params) => (
+  //       <CustomizedDialogs>
+  //       <EditFormEligibility params={params}></EditFormEligibility>
+  //     </CustomizedDialogs>
+  //   )
+  // },
   {
     field: 'delete', 
     headerName: 'Delete', 
     width: 150, 
     renderCell: (params) => (
-      <DeleteButton params={params} />
+      <IconButton onClick={() => {
+        const id = params.row.id;
+        fetch(`http://localhost:3001/eligibility/delete/${id}`, {method:"DELETE"})
+          .then(response => response.json())
+          .then(data => console.log(data))
+      }}>
+        <DeleteIcon />
+      </IconButton>
     )
   }
 ];
-
-const DeleteButton = ({params}) => {
-  const [open, setOpen] = useState(false);
-  const handleClickOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
-  
-  const handleDelete = () => {
-    const id = params.row.id;
-    fetch(`http://localhost:3001/eligibility/delete/${id}`, {method:"DELETE"})
-      .then(response => response.json())
-      .then(data => console.log(data))
-      .catch(error => console.log(error));
-    setOpen(false);
-  };
-
-  return (
-    <>
-      <IconButton onClick={handleClickOpen}>
-        <DeleteIcon />
-      </IconButton>
-      <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>Confirm Delete</DialogTitle>
-        <DialogContent>
-          Are you sure you want to delete this item?
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose} color="primary">
-            No
-          </Button>
-          <Button onClick={handleDelete} color="primary" autoFocus>
-            Yes
-          </Button>
-        </DialogActions>
-      </Dialog>
-    </>
-  );
-}
 
 const CompatibilityTable = () => {
   const [tableData, setTableData] = useState([]);
