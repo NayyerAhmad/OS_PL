@@ -7,7 +7,6 @@ const config = {
     database: "restapitest123",
     port: "3306" 
   },
-  listPerPage: 15,
 };
 
 module.exports = config;
